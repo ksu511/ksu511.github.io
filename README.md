@@ -47,19 +47,19 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 25px;
             box-sizing: border-box;
             transition: background-color 0.3s, color 0.3s;
         }
         .container {
             position: relative;
             background-color: var(--card-bg);
-            padding: 40px;
+            padding: 40px; /* زيادة الحشوة لتناسب العرض الكبير */
             border-radius: 15px;
             box-shadow: 0 10px 25px var(--shadow-color);
             text-align: center;
             width: 100%;
-            max-width: 400px;
+            max-width: 800px; /* <<<--- تم زيادة العرض هنا */
             border-top: 5px solid var(--primary-color);
             transition: background-color 0.3s;
             margin-bottom: 20px;
@@ -85,7 +85,7 @@
         
         .header { margin-bottom: 30px; }
         h1 {
-            font-size: 22px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--text-color);
             margin: 0;
@@ -94,11 +94,11 @@
             color: var(--label-color);
             margin: 0 0 10px 0;
             font-weight: 500;
-            font-size: 20px;
+            font-size: 24px;
         }
         .score-input-row {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             align-items: center;
             margin-bottom: 22px;
         }
@@ -114,18 +114,18 @@
             margin-bottom: 8px;
             color: var(--label-color);
             font-weight: 500;
-            font-size: 16px;
+            font-size: 18px;
         }
         input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px;
             padding-left: 40px; 
             border: 1px solid var(--border-color);
             background-color: var(--input-bg);
             color: var(--text-color);
             border-radius: 8px;
             box-sizing: border-box;
-            font-size: 18px;
+            font-size: 20px;
             font-family: 'Tajawal', sans-serif;
             transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
         }
@@ -158,20 +158,21 @@
         .weights-total {
             margin-bottom: 20px;
             font-weight: bold;
+            font-size: 18px;
         }
         .button-group {
             margin-top: 20px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
         }
         button {
-            padding: 13px;
+            padding: 15px;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 17px;
+            font-size: 18px;
             font-family: 'Tajawal', sans-serif;
             font-weight: 700;
             transition: all 0.3s ease;
@@ -183,10 +184,10 @@
         #clearBtn:hover { background-color: var(--danger-hover); }
         #result {
             margin-top: 25px;
-            font-size: 26px;
+            font-size: 30px;
             font-weight: 700;
             color: var(--success-color);
-            min-height: 35px;
+            min-height: 40px;
             line-height: 1.5;
         }
         .footer {
@@ -219,7 +220,7 @@
         }
         .prayer-text {
             margin-top: 20px;
-            font-size: 14px;
+            font-size: 16px;
             color: var(--label-color);
         }
     </style>
@@ -228,18 +229,15 @@
 
 <div class="container">
     <button id="theme-toggle" title="تبديل الوضع"></button>
-    
     <div class="header">
         <h2>جامعة الملك سعود</h2>
         <h1>حاسبة معدل التخصيص للمسارين العلمي والصحي</h1>
     </div>
-
     <form id="calculatorForm" onsubmit="return false;">
         <div class="score-input-row">
             <div class="input-group">
                 <label for="gpa">المعدل التراكمي (من 5)</label>
-                <input type="text" inputmode="decimal" id="gpa">
-                <button type="button" class="clear-btn" onclick="clearInput('gpa')">&times;</button>
+                <input type="text" inputmode="decimal" id="gpa"><button type="button" class="clear-btn" onclick="clearInput('gpa')">&times;</button>
             </div>
             <div class="weight-group">
                 <label for="gpa-weight">الوزن %</label>
@@ -249,8 +247,7 @@
         <div class="score-input-row">
             <div class="input-group">
                 <label for="qudrat">درجة القدرات</label>
-                <input type="text" inputmode="numeric" id="qudrat">
-                 <button type="button" class="clear-btn" onclick="clearInput('qudrat')">&times;</button>
+                <input type="text" inputmode="numeric" id="qudrat"><button type="button" class="clear-btn" onclick="clearInput('qudrat')">&times;</button>
             </div>
             <div class="weight-group">
                 <label for="qudrat-weight">الوزن %</label>
@@ -260,28 +257,21 @@
         <div class="score-input-row">
             <div class="input-group">
                 <label for="tahsili">درجة التحصيلي</label>
-                <input type="text" inputmode="numeric" id="tahsili">
-                 <button type="button" class="clear-btn" onclick="clearInput('tahsili')">&times;</button>
+                <input type="text" inputmode="numeric" id="tahsili"><button type="button" class="clear-btn" onclick="clearInput('tahsili')">&times;</button>
             </div>
             <div class="weight-group">
                 <label for="tahsili-weight">الوزن %</label>
                 <input type="text" inputmode="numeric" id="tahsili-weight" value="25" class="weight-input">
             </div>
         </div>
-        
-        <div class="weights-total" id="weights-total-text">
-            مجموع الأوزان: 100%
-        </div>
-
+        <div class="weights-total" id="weights-total-text">مجموع الأوزان: 100%</div>
         <div class="button-group">
             <button id="calculateBtn" type="button" onclick="calculate()">احسب</button>
             <button id="clearBtn" type="button" onclick="clearData()">مسح الكل</button>
         </div>
     </form>
-
     <div id="result"></div>
 </div>
-
 <div class="footer">
     <a href="twitter://user?screen_name=K1alotaibi" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.237 6.522L14.472.244h-1.25L8.73 5.688 4.734.244H.244l5.58 7.84L.244 15.756h1.25l4.74-5.83 4.28 5.83h4.49L9.237 6.522zm-1.13 1.623l-.74-1.04-4.23-5.9H5.03l3.22 4.5.74 1.04 4.5 6.26h-1.88l-3.5-4.88z"></path></svg>
@@ -289,7 +279,6 @@
     </a>
     <p class="prayer-text">دعواتكم لي ولوالدي وجميع المسلمين</p>
 </div>
-
 <script>
     // --- GENERAL ELEMENTS ---
     const resultDiv = document.getElementById('result');
@@ -301,7 +290,6 @@
     const body = document.body;
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
-        // Save the user's preference
         if (body.classList.contains('dark-mode')) {
             localStorage.setItem('theme', 'dark');
         } else {
@@ -328,7 +316,6 @@
 
     // --- PAGE LOAD INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
-        // Default to dark mode unless the user has explicitly chosen light mode
         if (localStorage.getItem('theme') !== 'light') {
             body.classList.add('dark-mode');
         }
@@ -340,10 +327,7 @@
         if (str === null || str === undefined || String(str).trim() === '') return NaN;
         const arabicEastern = /[\u0660-\u0669]/g;
         const arabicIndic = /[\u06F0-\u06F9]/g;
-        let newStr = String(str)
-            .replace(arabicEastern, d => d.charCodeAt(0) - 0x0660)
-            .replace(arabicIndic, d => d.charCodeAt(0) - 0x06F0)
-            .replace(/٫/g, '.');
+        let newStr = String(str).replace(arabicEastern, d => d.charCodeAt(0) - 0x0660).replace(arabicIndic, d => d.charCodeAt(0) - 0x06F0).replace(/٫/g, '.');
         return parseFloat(newStr);
     }
 
@@ -351,39 +335,32 @@
         const gpa = convertToEnglishNumerals(document.getElementById('gpa').value);
         const qudrat = convertToEnglishNumerals(document.getElementById('qudrat').value);
         const tahsili = convertToEnglishNumerals(document.getElementById('tahsili').value);
-
         const gpaWeight = convertToEnglishNumerals(document.getElementById('gpa-weight').value);
         const qudratWeight = convertToEnglishNumerals(document.getElementById('qudrat-weight').value);
         const tahsiliWeight = convertToEnglishNumerals(document.getElementById('tahsili-weight').value);
-
         if (isNaN(gpa) || isNaN(qudrat) || isNaN(tahsili) || isNaN(gpaWeight) || isNaN(qudratWeight) || isNaN(tahsiliWeight)) {
             resultDiv.innerText = 'الرجاء إدخال جميع القيم والأوزان.';
             resultDiv.style.color = dangerColor;
             return;
         }
-        
         const totalWeight = gpaWeight + qudratWeight + tahsiliWeight;
         if (Math.round(totalWeight) !== 100) {
             resultDiv.innerText = 'مجموع الأوزان يجب أن يكون 100%.';
             resultDiv.style.color = dangerColor;
             return;
         }
-
         const gpaPercentage = (gpa / 5) * 100;
         const weightedScore = (gpaPercentage * (gpaWeight / 100)) + (qudrat * (qudratWeight / 100)) + (tahsili * (tahsiliWeight / 100));
-
         const arabicResult = new Intl.NumberFormat('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(weightedScore);
         resultDiv.innerText = `النسبة الموزونة النهائية: ${arabicResult}٪`;
         resultDiv.style.color = successColor;
     }
     
-    // Function to clear a single input field
     function clearInput(inputId) {
         document.getElementById(inputId).value = '';
         document.getElementById(inputId).focus();
     }
 
-    // Function to clear all form fields
     function clearData() {
         document.getElementById('calculatorForm').reset();
         resultDiv.innerText = '';
