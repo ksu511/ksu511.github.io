@@ -54,12 +54,12 @@
         .container {
             position: relative;
             background-color: var(--card-bg);
-            padding: 40px;
+            padding: 25px; /* تم تقليل الحشوة الداخلية */
             border-radius: 15px;
             box-shadow: 0 10px 25px var(--shadow-color);
             text-align: center;
             width: 100%;
-            max-width: 400px;
+            max-width: 400px; /* عرض مناسب للجوال */
             border-top: 5px solid var(--primary-color);
             transition: background-color 0.3s;
             margin-bottom: 20px;
@@ -83,27 +83,28 @@
         #theme-toggle::after { content: var(--mode-icon); }
         #theme-toggle:hover { background-color: rgba(128, 128, 128, 0.1); }
         
-        .header { margin-bottom: 30px; }
+        .header { margin-bottom: 25px; }
         h1 {
-            font-size: 22px;
+            font-size: 20px; /* تم تصغير الخط ليناسب العنوان */
             font-weight: 700;
             color: var(--text-color);
             margin: 0;
+            line-height: 1.4;
         }
         h2 {
             color: var(--label-color);
             margin: 0 0 10px 0;
             font-weight: 500;
-            font-size: 20px;
+            font-size: 18px;
         }
         .score-input-row {
             display: flex;
             gap: 10px;
             align-items: center;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
         .input-group { 
-            flex: 3; 
+            flex: 3.5; /* زيادة المساحة لخانة الإدخال الرئيسية */
             text-align: right; 
             position: relative;
         }
@@ -114,18 +115,18 @@
             margin-bottom: 8px;
             color: var(--label-color);
             font-weight: 500;
-            font-size: 16px;
+            font-size: 14px; /* تم تصغير الخط ليناسب الخانات */
         }
         input {
             width: 100%;
             padding: 12px 15px;
-            padding-left: 40px; 
+            padding-left: 35px; 
             border: 1px solid var(--border-color);
             background-color: var(--input-bg);
             color: var(--text-color);
             border-radius: 8px;
             box-sizing: border-box;
-            font-size: 18px;
+            font-size: 16px;
             font-family: 'Tajawal', sans-serif;
             transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
         }
@@ -143,9 +144,9 @@
             border: none;
             color: var(--label-color);
             cursor: pointer;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
-            width: 40px;
+            width: 35px;
             height: 100%;
             line-height: 1;
             opacity: 0.6;
@@ -171,7 +172,7 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 17px;
+            font-size: 16px;
             font-family: 'Tajawal', sans-serif;
             font-weight: 700;
             transition: all 0.3s ease;
@@ -183,7 +184,7 @@
         #clearBtn:hover { background-color: var(--danger-hover); }
         #result {
             margin-top: 25px;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--success-color);
             min-height: 35px;
@@ -193,29 +194,6 @@
             font-size: 16px;
             color: var(--label-color);
             text-align: center;
-        }
-        .footer a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 15px;
-            border-radius: 20px;
-            background-color: var(--card-bg);
-            box-shadow: 0 4px 10px var(--shadow-color);
-            transition: all 0.3s ease;
-        }
-        .footer a:hover {
-            transform: translateY(-2px);
-            color: var(--primary-color);
-            box-shadow: 0 6px 15px var(--shadow-color);
-        }
-        .footer svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
         }
         .prayer-text {
             margin-top: 20px;
@@ -283,10 +261,6 @@
 </div>
 
 <div class="footer">
-    <a href="twitter://user?screen_name=K1alotaibi" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.237 6.522L14.472.244h-1.25L8.73 5.688 4.734.244H.244l5.58 7.84L.244 15.756h1.25l4.74-5.83 4.28 5.83h4.49L9.237 6.522zm-1.13 1.623l-.74-1.04-4.23-5.9H5.03l3.22 4.5.74 1.04 4.5 6.26h-1.88l-3.5-4.88z"></path></svg>
-        <span>@K1alotaibi</span>
-    </a>
     <p class="prayer-text">دعواتكم لي ولوالدي وجميع المسلمين</p>
 </div>
 
