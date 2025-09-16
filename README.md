@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة النسبة الموزونة | جامعة الملك سعود</title>
+    <title>حاسبة معدل التخصيص</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +94,7 @@
             color: var(--label-color);
             margin: 0;
             font-weight: 500;
-            font-size: 22px;
+            font-size: 20px;
         }
         .score-input-row {
             display: flex;
@@ -102,7 +102,11 @@
             align-items: center;
             margin-bottom: 22px;
         }
-        .input-group { flex: 3; text-align: right; }
+        .input-group { 
+            flex: 3; 
+            text-align: right; 
+            position: relative;
+        }
         .weight-group { flex: 1; text-align: right; }
         
         label {
@@ -115,6 +119,7 @@
         input {
             width: 100%;
             padding: 12px 15px;
+            padding-left: 40px; 
             border: 1px solid var(--border-color);
             background-color: var(--input-bg);
             color: var(--text-color);
@@ -129,6 +134,27 @@
             outline: none;
             box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
         }
+        .clear-btn {
+            position: absolute;
+            left: 1px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--label-color);
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            width: 40px;
+            height: 100%;
+            line-height: 1;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .clear-btn:hover {
+            opacity: 1;
+        }
+
         .weights-total {
             margin-bottom: 20px;
             font-weight: bold;
@@ -147,7 +173,7 @@
             cursor: pointer;
             font-size: 17px;
             font-family: 'Tajawal', sans-serif;
-            font- أي weight: 700;
+            font-weight: 700;
             transition: all 0.3s ease;
         }
         button:active { transform: scale(0.98); }
@@ -164,17 +190,17 @@
             line-height: 1.5;
         }
         .footer {
-            font-size: 16px; /* حجم خط أكبر للرابط */
+            font-size: 16px;
             color: var(--label-color);
             text-align: center;
         }
         .footer a {
-            color: var(--text-color); /* لون النص العادي */
+            color: var(--text-color);
             text-decoration: none;
             font-weight: bold;
-            display: inline-flex; /* لجعل الأيقونة والنص في سطر واحد */
+            display: inline-flex;
             align-items: center;
-            gap: 8px; /* مسافة بين الأيقونة والنص */
+            gap: 8px;
             padding: 8px 15px;
             border-radius: 20px;
             background-color: var(--card-bg);
@@ -182,14 +208,14 @@
             transition: all 0.3s ease;
         }
         .footer a:hover {
-            transform: translateY(-2px); /* تأثير رفع بسيط عند التمرير */
+            transform: translateY(-2px);
             color: var(--primary-color);
             box-shadow: 0 6px 15px var(--shadow-color);
         }
         .footer svg {
             width: 20px;
             height: 20px;
-            fill: currentColor; /* الأيقونة تأخذ نفس لون النص */
+            fill: currentColor;
         }
     </style>
 </head>
@@ -200,14 +226,15 @@
     
     <div class="header">
         <h1>جامعة الملك سعود</h1>
-        <h2>حاسبة النسبة الموزونة</h2>
+        <h2>حاسبة معدل التخصيص للمسارين العلمي والصحي</h2>
     </div>
 
     <form id="calculatorForm" onsubmit="return false;">
         <div class="score-input-row">
             <div class="input-group">
                 <label for="gpa">المعدل التراكمي (من 5)</label>
-                <input type="text" inputmode="decimal" id="gpa" placeholder="مثال: ٤.٧٥">
+                <input type="text" inputmode="decimal" id="gpa">
+                <button type="button" class="clear-btn" onclick="clearInput('gpa')">&times;</button>
             </div>
             <div class="weight-group">
                 <label for="gpa-weight">الوزن %</label>
@@ -217,7 +244,8 @@
         <div class="score-input-row">
             <div class="input-group">
                 <label for="qudrat">درجة القدرات</label>
-                <input type="text" inputmode="numeric" id="qudrat" placeholder="مثال: ٨٥">
+                <input type="text" inputmode="numeric" id="qudrat">
+                 <button type="button" class="clear-btn" onclick="clearInput('qudrat')">&times;</button>
             </div>
             <div class="weight-group">
                 <label for="qudrat-weight">الوزن %</label>
@@ -227,7 +255,8 @@
         <div class="score-input-row">
             <div class="input-group">
                 <label for="tahsili">درجة التحصيلي</label>
-                <input type="text" inputmode="numeric" id="tahsili" placeholder="مثال: ٩٠">
+                <input type="text" inputmode="numeric" id="tahsili">
+                 <button type="button" class="clear-btn" onclick="clearInput('tahsili')">&times;</button>
             </div>
             <div class="weight-group">
                 <label for="tahsili-weight">الوزن %</label>
@@ -241,7 +270,7 @@
 
         <div class="button-group">
             <button id="calculateBtn" type="button" onclick="calculate()">احسب</button>
-            <button id="clearBtn" type="button" onclick="clearData()">مسح</button>
+            <button id="clearBtn" type="button" onclick="clearData()">مسح الكل</button>
         </div>
     </form>
 
@@ -249,7 +278,7 @@
 </div>
 
 <div class="footer">
-    <a href="https://x.com/k1alotaibi?s=21" target="_blank">
+    <a href="https://x.com/K1alotaibi" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.237 6.522L14.472.244h-1.25L8.73 5.688 4.734.244H.244l5.58 7.84L.244 15.756h1.25l4.74-5.83 4.28 5.83h4.49L9.237 6.522zm-1.13 1.623l-.74-1.04-4.23-5.9H5.03l3.22 4.5.74 1.04 4.5 6.26h-1.88l-3.5-4.88z"></path></svg>
         <span>@K1alotaibi</span>
     </a>
@@ -288,9 +317,13 @@
 
     // --- PAGE LOAD INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
-        if (localStorage.getItem('theme') === 'dark') {
+        if (!localStorage.getItem('theme')) {
+            body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+        } else if (localStorage.getItem('theme') === 'dark') {
             body.classList.add('dark-mode');
         }
+        
         updateWeightsTotal();
     });
 
@@ -332,10 +365,16 @@
         const weightedScore = (gpaPercentage * (gpaWeight / 100)) + (qudrat * (qudratWeight / 100)) + (tahsili * (tahsiliWeight / 100));
 
         const arabicResult = new Intl.NumberFormat('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(weightedScore);
-        resultDiv.innerText = `النسبة الموزونة النهائية: ${arabicResult}٪`;
+        resultDiv.innerText = `معدل التخصيص: ${arabicResult}٪`;
         resultDiv.style.color = successColor;
     }
 
+    // Function to clear a single input field
+    function clearInput(inputId) {
+        document.getElementById(inputId).value = '';
+    }
+
+    // Function to clear all form fields
     function clearData() {
         document.getElementById('calculatorForm').reset();
         resultDiv.innerText = '';
