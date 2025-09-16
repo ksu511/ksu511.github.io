@@ -54,12 +54,12 @@
         .container {
             position: relative;
             background-color: var(--card-bg);
-            padding: 40px;
+            padding: 30px; /* تم تقليل الحشوة الداخلية */
             border-radius: 15px;
             box-shadow: 0 10px 25px var(--shadow-color);
             text-align: center;
             width: 100%;
-            max-width: 400px;
+            max-width: 370px; /* تم تصغير العرض الأقصى */
             border-top: 5px solid var(--primary-color);
             transition: background-color 0.3s;
             margin-bottom: 20px;
