@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة النسبة الموزونة</title>
+    <title>حاسبة معدل التخصيص - جامعة الملك سعود</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -59,7 +59,7 @@
             box-shadow: 0 10px 25px var(--shadow-color);
             text-align: center;
             width: 100%;
-            max-width: 480px;
+            max-width: 400px;
             border-top: 5px solid var(--primary-color);
             transition: background-color 0.3s;
             margin-bottom: 20px;
@@ -85,14 +85,14 @@
         
         .header { margin-bottom: 30px; }
         h1 {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-color);
-            margin: 0 0 10px 0;
+            margin: 0;
         }
         h2 {
             color: var(--label-color);
-            margin: 0;
+            margin: 0 0 10px 0;
             font-weight: 500;
             font-size: 20px;
         }
@@ -217,6 +217,11 @@
             height: 20px;
             fill: currentColor;
         }
+        .prayer-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--label-color);
+        }
     </style>
 </head>
 <body>
@@ -225,8 +230,8 @@
     <button id="theme-toggle" title="تبديل الوضع"></button>
     
     <div class="header">
-        <h1>حاسبة النسبة الموزونة</h1>
-        <h2>أدخل درجاتك لحساب معدلك المركب</h2>
+        <h2>جامعة الملك سعود</h2>
+        <h1>حاسبة معدل التخصيص للمسارين العلمي والصحي</h1>
     </div>
 
     <form id="calculatorForm" onsubmit="return false;">
@@ -278,10 +283,11 @@
 </div>
 
 <div class="footer">
-    <a href="https://x.com/K1alotaibi" target="_blank">
+    <a href="twitter://user?screen_name=K1alotaibi" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.237 6.522L14.472.244h-1.25L8.73 5.688 4.734.244H.244l5.58 7.84L.244 15.756h1.25l4.74-5.83 4.28 5.83h4.49L9.237 6.522zm-1.13 1.623l-.74-1.04-4.23-5.9H5.03l3.22 4.5.74 1.04 4.5 6.26h-1.88l-3.5-4.88z"></path></svg>
         <span>@K1alotaibi</span>
     </a>
+    <p class="prayer-text">دعواتكم لي ولوالدي وجميع المسلمين</p>
 </div>
 
 <script>
@@ -295,7 +301,12 @@
     const body = document.body;
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
-        localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+        // Save the user's preference
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
     });
 
     // --- WEIGHTS VALIDATION LOGIC ---
@@ -317,13 +328,10 @@
 
     // --- PAGE LOAD INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
-        if (!localStorage.getItem('theme')) {
-            body.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark');
-        } else if (localStorage.getItem('theme') === 'dark') {
+        // Default to dark mode unless the user has explicitly chosen light mode
+        if (localStorage.getItem('theme') !== 'light') {
             body.classList.add('dark-mode');
         }
-        
         updateWeightsTotal();
     });
 
@@ -355,7 +363,7 @@
         }
         
         const totalWeight = gpaWeight + qudratWeight + tahsiliWeight;
-        if (totalWeight !== 100) {
+        if (Math.round(totalWeight) !== 100) {
             resultDiv.innerText = 'مجموع الأوزان يجب أن يكون 100%.';
             resultDiv.style.color = dangerColor;
             return;
@@ -365,13 +373,14 @@
         const weightedScore = (gpaPercentage * (gpaWeight / 100)) + (qudrat * (qudratWeight / 100)) + (tahsili * (tahsiliWeight / 100));
 
         const arabicResult = new Intl.NumberFormat('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(weightedScore);
-        resultDiv.innerText = `النسبة الموزونة: ${arabicResult}٪`;
+        resultDiv.innerText = `النسبة الموزونة النهائية: ${arabicResult}٪`;
         resultDiv.style.color = successColor;
     }
-
+    
     // Function to clear a single input field
     function clearInput(inputId) {
         document.getElementById(inputId).value = '';
+        document.getElementById(inputId).focus();
     }
 
     // Function to clear all form fields
