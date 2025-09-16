@@ -4,167 +4,342 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حاسبة النسبة الموزونة | جامعة الملك سعود</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary-color: #007bff;
+            --primary-hover: #0056b3;
+            --danger-color: #dc3545;
+            --danger-hover: #c82333;
+            --success-color: #28a745;
+            --bg-color: #f7f9fc;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --label-color: #34495e;
+            --border-color: #dee2e6;
+            --input-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --mode-icon: '🌙';
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --label-color: #adadad;
+            --border-color: #444444;
+            --input-bg: #2a2a2a;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --mode-icon: '☀️';
+        }
+
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #eef2f5; /* لون خلفية أفتح */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            position: relative;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            text-align: center;
+            width: 100%;
+            max-width: 480px;
+            border-top: 5px solid var(--primary-color);
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+        #theme-toggle {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* استخدام min-height بدلاً من height لتجنب مشاكل المحتوى الطويل */
-            margin: 0;
-            padding: 20px; /* إضافة padding لتحسين المظهر على الجوال */
-            box-sizing: border-box; /* للتأكد من أن padding لا يزيد من عرض العنصر */
+            transition: background-color 0.3s, border-color 0.3s;
         }
-        .container {
-            background-color: #ffffff;
-            padding: 35px;
-            border-radius: 12px; /* حواف أكثر دائرية */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* ظل أوضح */
-            text-align: center;
-            width: 95%;
-            max-width: 450px; /* عرض أكبر قليلاً */
-        }
-        .header {
-            margin-bottom: 25px;
-        }
-        .logo {
-            max-width: 100px; /* حجم الشعار */
-            height: auto;
-            margin-bottom: 15px;
+        #theme-toggle::after { content: var(--mode-icon); }
+        #theme-toggle:hover { background-color: rgba(128, 128, 128, 0.1); }
+        
+        .header { margin-bottom: 30px; }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin: 0 0 10px 0;
         }
         h2 {
-            color: #2c3e50; /* لون عنوان أغمق */
-            margin-bottom: 25px;
-            font-weight: 700; /* خط أعرض */
+            color: var(--label-color);
+            margin: 0;
+            font-weight: 500;
+            font-size: 22px;
         }
-        .input-group {
-            margin-bottom: 20px;
-            text-align: right;
+        .score-input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 22px;
         }
+        .input-group { flex: 3; text-align: right; }
+        .weight-group { flex: 1; text-align: right; }
+        
         label {
             display: block;
             margin-bottom: 8px;
-            color: #34495e; /* لون نص التسمية */
-            font-weight: bold;
-            font-size: 15px;
+            color: var(--label-color);
+            font-weight: 500;
+            font-size: 16px;
         }
         input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ced4da; /* لون حدود أوضح */
-            border-radius: 6px;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border-radius: 8px;
             box-sizing: border-box;
-            font-size: 16px;
-            color: #333;
+            font-size: 18px;
+            font-family: 'Tajawal', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
         }
         input:focus {
-            border-color: #007bff; /* حدود زرقاء عند التركيز */
+            border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* ظل خفيف عند التركيز */
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+        }
+        .weights-total {
+            margin-bottom: 20px;
+            font-weight: bold;
         }
         .button-group {
-            margin-top: 30px;
-            display: flex;
-            gap: 10px; /* مسافة بين الأزرار */
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
         button {
-            flex: 1; /* لجعل الأزرار تأخذ نفس المساحة */
-            padding: 12px;
+            padding: 13px;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 17px;
-            font-weight: bold;
-            transition: background-color 0.3s ease; /* تأثير انتقال سلس */
+            font-family: 'Tajawal', sans-serif;
+            font- أي weight: 700;
+            transition: all 0.3s ease;
         }
-        #calculateBtn {
-            background-color: #007bff; /* أزرق أساسي */
-        }
-        #calculateBtn:hover {
-            background-color: #0056b3;
-        }
-        #clearBtn {
-            background-color: #dc3545; /* أحمر للخيار السلبي */
-        }
-        #clearBtn:hover {
-            background-color: #c82333;
-        }
+        button:active { transform: scale(0.98); }
+        #calculateBtn { background-color: var(--primary-color); }
+        #calculateBtn:hover { background-color: var(--primary-hover); }
+        #clearBtn { background-color: var(--danger-color); }
+        #clearBtn:hover { background-color: var(--danger-hover); }
         #result {
             margin-top: 25px;
-            font-size: 24px; /* حجم خط أكبر للنتيجة */
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--success-color);
+            min-height: 35px;
+            line-height: 1.5;
+        }
+        .footer {
+            font-size: 16px; /* حجم خط أكبر للرابط */
+            color: var(--label-color);
+            text-align: center;
+        }
+        .footer a {
+            color: var(--text-color); /* لون النص العادي */
+            text-decoration: none;
             font-weight: bold;
-            color: #28a745; /* لون أخضر للنتيجة الإيجابية */
-            min-height: 30px; /* للحفاظ على مساحة حتى لو لا يوجد نص */
+            display: inline-flex; /* لجعل الأيقونة والنص في سطر واحد */
+            align-items: center;
+            gap: 8px; /* مسافة بين الأيقونة والنص */
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 10px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+        .footer a:hover {
+            transform: translateY(-2px); /* تأثير رفع بسيط عند التمرير */
+            color: var(--primary-color);
+            box-shadow: 0 6px 15px var(--shadow-color);
+        }
+        .footer svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor; /* الأيقونة تأخذ نفس لون النص */
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <button id="theme-toggle" title="تبديل الوضع"></button>
+    
     <div class="header">
-        <img src="https://upload.wikimedia.org/wikipedia/ar/2/22/King_Saud_University_logo.svg" alt="شعار جامعة الملك سعود" class="logo">
+        <h1>جامعة الملك سعود</h1>
         <h2>حاسبة النسبة الموزونة</h2>
     </div>
 
-    <div class="input-group">
-        <label for="gpa">المعدل التراكمي (من 5)</label>
-        <input type="number" id="gpa" placeholder="أدخل المعدل من 5" max="5" step="0.01">
-    </div>
+    <form id="calculatorForm" onsubmit="return false;">
+        <div class="score-input-row">
+            <div class="input-group">
+                <label for="gpa">المعدل التراكمي (من 5)</label>
+                <input type="text" inputmode="decimal" id="gpa" placeholder="مثال: ٤.٧٥">
+            </div>
+            <div class="weight-group">
+                <label for="gpa-weight">الوزن %</label>
+                <input type="text" inputmode="numeric" id="gpa-weight" value="50" class="weight-input">
+            </div>
+        </div>
+        <div class="score-input-row">
+            <div class="input-group">
+                <label for="qudrat">درجة القدرات</label>
+                <input type="text" inputmode="numeric" id="qudrat" placeholder="مثال: ٨٥">
+            </div>
+            <div class="weight-group">
+                <label for="qudrat-weight">الوزن %</label>
+                <input type="text" inputmode="numeric" id="qudrat-weight" value="25" class="weight-input">
+            </div>
+        </div>
+        <div class="score-input-row">
+            <div class="input-group">
+                <label for="tahsili">درجة التحصيلي</label>
+                <input type="text" inputmode="numeric" id="tahsili" placeholder="مثال: ٩٠">
+            </div>
+            <div class="weight-group">
+                <label for="tahsili-weight">الوزن %</label>
+                <input type="text" inputmode="numeric" id="tahsili-weight" value="25" class="weight-input">
+            </div>
+        </div>
+        
+        <div class="weights-total" id="weights-total-text">
+            مجموع الأوزان: 100%
+        </div>
 
-    <div class="input-group">
-        <label for="qudrat">درجة القدرات (من 100)</label>
-        <input type="number" id="qudrat" placeholder="أدخل درجة القدرات" max="100">
-    </div>
-
-    <div class="input-group">
-        <label for="tahsili">درجة التحصيلي (من 100)</label>
-        <input type="number" id="tahsili" placeholder="أدخل درجة التحصيلي" max="100">
-    </div>
-
-    <div class="button-group">
-        <button id="calculateBtn" onclick="calculate()">احسب</button>
-        <button id="clearBtn" onclick="clearData()">مسح البيانات</button>
-    </div>
+        <div class="button-group">
+            <button id="calculateBtn" type="button" onclick="calculate()">احسب</button>
+            <button id="clearBtn" type="button" onclick="clearData()">مسح</button>
+        </div>
+    </form>
 
     <div id="result"></div>
 </div>
 
-<script>
-    function calculate() {
-        const gpa = parseFloat(document.getElementById('gpa').value);
-        const qudrat = parseFloat(document.getElementById('qudrat').value);
-        const tahsili = parseFloat(document.getElementById('tahsili').value);
+<div class="footer">
+    <a href="https://x.com/k1alotaibi?s=21" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.237 6.522L14.472.244h-1.25L8.73 5.688 4.734.244H.244l5.58 7.84L.244 15.756h1.25l4.74-5.83 4.28 5.83h4.49L9.237 6.522zm-1.13 1.623l-.74-1.04-4.23-5.9H5.03l3.22 4.5.74 1.04 4.5 6.26h-1.88l-3.5-4.88z"></path></svg>
+        <span>@K1alotaibi</span>
+    </a>
+</div>
 
-        if (isNaN(gpa) || isNaN(qudrat) || isNaN(tahsili)) {
-            document.getElementById('result').innerText = 'الرجاء إدخال جميع القيم بشكل صحيح.';
-            document.getElementById('result').style.color = '#dc3545'; // لون أحمر للخطأ
+<script>
+    // --- GENERAL ELEMENTS ---
+    const resultDiv = document.getElementById('result');
+    const dangerColor = getComputedStyle(document.documentElement).getPropertyValue('--danger-color').trim();
+    const successColor = getComputedStyle(document.documentElement).getPropertyValue('--success-color').trim();
+
+    // --- DARK MODE LOGIC ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+
+    // --- WEIGHTS VALIDATION LOGIC ---
+    const weightInputs = document.querySelectorAll('.weight-input');
+    const weightsTotalText = document.getElementById('weights-total-text');
+    function updateWeightsTotal() {
+        let total = 0;
+        weightInputs.forEach(input => {
+            total += convertToEnglishNumerals(input.value) || 0;
+        });
+        weightsTotalText.textContent = `مجموع الأوزان: ${total}%`;
+        if (total !== 100) {
+            weightsTotalText.style.color = dangerColor;
+        } else {
+            weightsTotalText.style.color = successColor;
+        }
+    }
+    weightInputs.forEach(input => input.addEventListener('input', updateWeightsTotal));
+
+    // --- PAGE LOAD INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+        }
+        updateWeightsTotal();
+    });
+
+    // --- CALCULATOR LOGIC ---
+    function convertToEnglishNumerals(str) {
+        if (str === null || str === undefined || String(str).trim() === '') return NaN;
+        const arabicEastern = /[\u0660-\u0669]/g;
+        const arabicIndic = /[\u06F0-\u06F9]/g;
+        let newStr = String(str)
+            .replace(arabicEastern, d => d.charCodeAt(0) - 0x0660)
+            .replace(arabicIndic, d => d.charCodeAt(0) - 0x06F0)
+            .replace(/٫/g, '.');
+        return parseFloat(newStr);
+    }
+
+    function calculate() {
+        const gpa = convertToEnglishNumerals(document.getElementById('gpa').value);
+        const qudrat = convertToEnglishNumerals(document.getElementById('qudrat').value);
+        const tahsili = convertToEnglishNumerals(document.getElementById('tahsili').value);
+
+        const gpaWeight = convertToEnglishNumerals(document.getElementById('gpa-weight').value);
+        const qudratWeight = convertToEnglishNumerals(document.getElementById('qudrat-weight').value);
+        const tahsiliWeight = convertToEnglishNumerals(document.getElementById('tahsili-weight').value);
+
+        if (isNaN(gpa) || isNaN(qudrat) || isNaN(tahsili) || isNaN(gpaWeight) || isNaN(qudratWeight) || isNaN(tahsiliWeight)) {
+            resultDiv.innerText = 'الرجاء إدخال جميع القيم والأوزان.';
+            resultDiv.style.color = dangerColor;
             return;
         }
         
-        if (gpa > 5 || gpa < 0 || qudrat > 100 || qudrat < 0 || tahsili > 100 || tahsili < 0) {
-            document.getElementById('result').innerText = 'الرجاء التأكد من أن القيم المدخلة ضمن النطاق المسموح به.';
-            document.getElementById('result').style.color = '#dc3545'; // لون أحمر للخطأ
+        const totalWeight = gpaWeight + qudratWeight + tahsiliWeight;
+        if (totalWeight !== 100) {
+            resultDiv.innerText = 'مجموع الأوزان يجب أن يكون 100%.';
+            resultDiv.style.color = dangerColor;
             return;
         }
 
         const gpaPercentage = (gpa / 5) * 100;
-        const weightedScore = (gpaPercentage * 0.50) + (qudrat * 0.25) + (tahsili * 0.25);
+        const weightedScore = (gpaPercentage * (gpaWeight / 100)) + (qudrat * (qudratWeight / 100)) + (tahsili * (tahsiliWeight / 100));
 
-        document.getElementById('result').innerText = `نسبتك الموزونة هي: ${weightedScore.toFixed(2)}%`;
-        document.getElementById('result').style.color = '#28a745'; // لون أخضر للنتيجة
+        const arabicResult = new Intl.NumberFormat('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(weightedScore);
+        resultDiv.innerText = `النسبة الموزونة النهائية: ${arabicResult}٪`;
+        resultDiv.style.color = successColor;
     }
 
     function clearData() {
-        document.getElementById('gpa').value = ''; // مسح خانة المعدل
-        document.getElementById('qudrat').value = ''; // مسح خانة القدرات
-        document.getElementById('tahsili').value = ''; // مسح خانة التحصيلي
-        document.getElementById('result').innerText = ''; // مسح النتيجة المعروضة
-        document.getElementById('result').style.color = '#2c3e50'; // إعادة لون النتيجة للأصلي
+        document.getElementById('calculatorForm').reset();
+        resultDiv.innerText = '';
+        updateWeightsTotal();
     }
 </script>
 
