@@ -47,19 +47,19 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 25px; /* تمت زيادة الحشوة لزيادة التباعد */
             box-sizing: border-box;
             transition: background-color 0.3s, color 0.3s;
         }
         .container {
             position: relative;
             background-color: var(--card-bg);
-            padding: 40px;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 25px var(--shadow-color);
             text-align: center;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px; /* تمت زيادة العرض الأقصى */
             border-top: 5px solid var(--primary-color);
             transition: background-color 0.3s;
             margin-bottom: 20px;
