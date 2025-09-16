@@ -16,23 +16,23 @@
             --danger-color: #dc3545;
             --danger-hover: #c82333;
             --success-color: #28a745;
-            --bg-color: #f7f9fc;
+            --bg-color: #f0f2f5;
             --card-bg: #ffffff;
             --text-color: #2c3e50;
-            --label-color: #34495e;
+            --label-color: #8899a6;
             --border-color: #dee2e6;
-            --input-bg: #ffffff;
+            --input-bg: #f8f9fa;
             --shadow-color: rgba(0, 0, 0, 0.08);
             --mode-icon: '🌙';
         }
 
         body.dark-mode {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
+            --bg-color: #10171e;
+            --card-bg: #1a2836;
             --text-color: #e0e0e0;
-            --label-color: #adadad;
-            --border-color: #444444;
-            --input-bg: #2a2a2a;
+            --label-color: #8899a6;
+            --border-color: #38444d;
+            --input-bg: #213243;
             --shadow-color: rgba(0, 0, 0, 0.2);
             --mode-icon: '☀️';
         }
@@ -54,21 +54,20 @@
         .container {
             position: relative;
             background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px var(--shadow-color);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
             text-align: center;
             width: 100%;
             max-width: 400px;
             border-top: 5px solid var(--primary-color);
             transition: background-color 0.3s;
-            margin-bottom: 20px;
         }
         #theme-toggle {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: transparent;
+            top: 20px;
+            left: 20px;
+            background: var(--input-bg);
             border: 1px solid var(--border-color);
             border-radius: 50%;
             width: 40px;
@@ -79,119 +78,120 @@
             justify-content: center;
             align-items: center;
             transition: background-color 0.3s, border-color 0.3s;
+            color: var(--text-color);
         }
         #theme-toggle::after { content: var(--mode-icon); }
-        #theme-toggle:hover { background-color: rgba(128, 128, 128, 0.1); }
         
-        .header { margin-bottom: 30px; }
-        h1 {
+        .header { margin-bottom: 20px; }
+        .header h2 {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--label-color);
+            margin: 0 0 10px 0;
+        }
+        .header h1 {
             font-size: 22px;
             font-weight: 700;
             color: var(--text-color);
             margin: 0;
+            line-height: 1.4;
         }
-        h2 {
-            color: var(--label-color);
-            margin: 0 0 10px 0;
-            font-weight: 500;
-            font-size: 20px;
+        hr {
+            border: none;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 25px auto;
         }
-        .score-input-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 22px;
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px 15px;
+            margin-bottom: 25px;
         }
-        .input-group { 
-            flex: 3; 
-            text-align: right; 
+        .form-group {
+            text-align: right;
+        }
+        .input-wrapper {
             position: relative;
         }
-        .weight-group { flex: 1; text-align: right; }
-        
         label {
             display: block;
             margin-bottom: 8px;
             color: var(--label-color);
             font-weight: 500;
-            font-size: 16px;
+            font-size: 14px;
         }
         input {
             width: 100%;
             padding: 12px 15px;
-            padding-left: 40px; 
             border: 1px solid var(--border-color);
             background-color: var(--input-bg);
             color: var(--text-color);
-            border-radius: 8px;
+            border-radius: 10px;
             box-sizing: border-box;
-            font-size: 18px;
+            font-size: 16px;
             font-family: 'Tajawal', sans-serif;
-            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+            text-align: center;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
+        .input-wrapper input { padding-right: 35px; }
         input:focus {
             border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
         }
         .clear-btn {
             position: absolute;
-            left: 1px;
+            right: 5px;
             top: 50%;
             transform: translateY(-50%);
             background: transparent;
             border: none;
             color: var(--label-color);
             cursor: pointer;
-            font-size: 24px;
-            font-weight: bold;
-            width: 40px;
+            font-size: 22px;
+            width: 30px;
             height: 100%;
-            line-height: 1;
-            opacity: 0.6;
-            transition: opacity 0.2s;
+            opacity: 0.7;
         }
-        .clear-btn:hover {
-            opacity: 1;
-        }
-
+        
         .weights-total {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: bold;
+            color: var(--success-color);
         }
         .button-group {
-            margin-top: 20px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
         button {
-            padding: 13px;
+            padding: 14px;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 17px;
+            font-size: 16px;
             font-family: 'Tajawal', sans-serif;
             font-weight: 700;
             transition: all 0.3s ease;
         }
-        button:active { transform: scale(0.98); }
+        button:active { transform: scale(0.97); }
         #calculateBtn { background-color: var(--primary-color); }
         #calculateBtn:hover { background-color: var(--primary-hover); }
         #clearBtn { background-color: var(--danger-color); }
         #clearBtn:hover { background-color: var(--danger-hover); }
         #result {
             margin-top: 25px;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--success-color);
             min-height: 35px;
-            line-height: 1.5;
         }
+
         .footer {
-            font-size: 16px;
-            color: var(--label-color);
+            margin-top: 25px;
             text-align: center;
         }
         .footer a {
@@ -201,24 +201,12 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 15px;
-            border-radius: 20px;
-            background-color: var(--card-bg);
-            box-shadow: 0 4px 10px var(--shadow-color);
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
-        .footer a:hover {
-            transform: translateY(-2px);
-            color: var(--primary-color);
-            box-shadow: 0 6px 15px var(--shadow-color);
-        }
-        .footer svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
+        .footer a:hover { color: var(--primary-color); }
+        .footer svg { width: 20px; height: 20px; fill: currentColor; }
         .prayer-text {
-            margin-top: 20px;
+            margin-top: 10px;
             font-size: 14px;
             color: var(--label-color);
         }
@@ -228,42 +216,43 @@
 
 <div class="container">
     <button id="theme-toggle" title="تبديل الوضع"></button>
-    
     <div class="header">
         <h2>جامعة الملك سعود</h2>
         <h1>حاسبة معدل التخصيص للمسارين العلمي والصحي</h1>
     </div>
-
+    <hr>
     <form id="calculatorForm" onsubmit="return false;">
-        <div class="score-input-row">
-            <div class="input-group">
+        <div class="form-grid">
+            <div class="form-group">
                 <label for="gpa">المعدل التراكمي (من 5)</label>
-                <input type="text" inputmode="decimal" id="gpa">
-                <button type="button" class="clear-btn" onclick="clearInput('gpa')">&times;</button>
+                <div class="input-wrapper">
+                    <input type="text" inputmode="decimal" id="gpa">
+                    <button type="button" class="clear-btn" onclick="clearInput('gpa')">&times;</button>
+                </div>
             </div>
-            <div class="weight-group">
+            <div class="form-group">
                 <label for="gpa-weight">الوزن %</label>
                 <input type="text" inputmode="numeric" id="gpa-weight" value="50" class="weight-input">
             </div>
-        </div>
-        <div class="score-input-row">
-            <div class="input-group">
+            <div class="form-group">
                 <label for="qudrat">درجة القدرات</label>
-                <input type="text" inputmode="numeric" id="qudrat">
-                 <button type="button" class="clear-btn" onclick="clearInput('qudrat')">&times;</button>
+                <div class="input-wrapper">
+                    <input type="text" inputmode="numeric" id="qudrat">
+                    <button type="button" class="clear-btn" onclick="clearInput('qudrat')">&times;</button>
+                </div>
             </div>
-            <div class="weight-group">
+            <div class="form-group">
                 <label for="qudrat-weight">الوزن %</label>
                 <input type="text" inputmode="numeric" id="qudrat-weight" value="25" class="weight-input">
             </div>
-        </div>
-        <div class="score-input-row">
-            <div class="input-group">
+            <div class="form-group">
                 <label for="tahsili">درجة التحصيلي</label>
-                <input type="text" inputmode="numeric" id="tahsili">
-                 <button type="button" class="clear-btn" onclick="clearInput('tahsili')">&times;</button>
+                <div class="input-wrapper">
+                    <input type="text" inputmode="numeric" id="tahsili">
+                    <button type="button" class="clear-btn" onclick="clearInput('tahsili')">&times;</button>
+                </div>
             </div>
-            <div class="weight-group">
+            <div class="form-group">
                 <label for="tahsili-weight">الوزن %</label>
                 <input type="text" inputmode="numeric" id="tahsili-weight" value="25" class="weight-input">
             </div>
@@ -274,16 +263,15 @@
         </div>
 
         <div class="button-group">
-            <button id="calculateBtn" type="button" onclick="calculate()">احسب</button>
             <button id="clearBtn" type="button" onclick="clearData()">مسح الكل</button>
+            <button id="calculateBtn" type="button" onclick="calculate()">احسب</button>
         </div>
     </form>
-
     <div id="result"></div>
 </div>
 
 <div class="footer">
-    <a href="twitter://user?screen_name=K1alotaibi" target="_blank">
+    <a href="https://x.com/K1alotaibi" target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.237 6.522L14.472.244h-1.25L8.73 5.688 4.734.244H.244l5.58 7.84L.244 15.756h1.25l4.74-5.83 4.28 5.83h4.49L9.237 6.522zm-1.13 1.623l-.74-1.04-4.23-5.9H5.03l3.22 4.5.74 1.04 4.5 6.26h-1.88l-3.5-4.88z"></path></svg>
         <span>@K1alotaibi</span>
     </a>
@@ -301,12 +289,7 @@
     const body = document.body;
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
-        // Save the user's preference
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-        } else {
-            localStorage.setItem('theme', 'light');
-        }
+        localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
     });
 
     // --- WEIGHTS VALIDATION LOGIC ---
@@ -318,7 +301,7 @@
             total += convertToEnglishNumerals(input.value) || 0;
         });
         weightsTotalText.textContent = `مجموع الأوزان: ${total}%`;
-        if (total !== 100) {
+        if (Math.round(total) !== 100) {
             weightsTotalText.style.color = dangerColor;
         } else {
             weightsTotalText.style.color = successColor;
@@ -328,7 +311,7 @@
 
     // --- PAGE LOAD INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
-        // Default to dark mode unless the user has explicitly chosen light mode
+        // Default to dark mode unless user has explicitly chosen light mode
         if (localStorage.getItem('theme') !== 'light') {
             body.classList.add('dark-mode');
         }
@@ -357,7 +340,7 @@
         const tahsiliWeight = convertToEnglishNumerals(document.getElementById('tahsili-weight').value);
 
         if (isNaN(gpa) || isNaN(qudrat) || isNaN(tahsili) || isNaN(gpaWeight) || isNaN(qudratWeight) || isNaN(tahsiliWeight)) {
-            resultDiv.innerText = 'الرجاء إدخال جميع القيم والأوزان.';
+            resultDiv.innerText = 'الرجاء إدخال جميع القيم.';
             resultDiv.style.color = dangerColor;
             return;
         }
@@ -373,7 +356,7 @@
         const weightedScore = (gpaPercentage * (gpaWeight / 100)) + (qudrat * (qudratWeight / 100)) + (tahsili * (tahsiliWeight / 100));
 
         const arabicResult = new Intl.NumberFormat('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(weightedScore);
-        resultDiv.innerText = `النسبة الموزونة النهائية: ${arabicResult}٪`;
+        resultDiv.innerText = `النسبة النهائية: ${arabicResult}٪`;
         resultDiv.style.color = successColor;
     }
     
