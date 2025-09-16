@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة معدل التخصيص</title>
+    <title>حاسبة النسبة الموزونة</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -225,8 +225,8 @@
     <button id="theme-toggle" title="تبديل الوضع"></button>
     
     <div class="header">
-        <h1>جامعة الملك سعود</h1>
-        <h2>حاسبة معدل التخصيص للمسارين العلمي والصحي</h2>
+        <h1>حاسبة النسبة الموزونة</h1>
+        <h2>أدخل درجاتك لحساب معدلك المركب</h2>
     </div>
 
     <form id="calculatorForm" onsubmit="return false;">
@@ -365,7 +365,7 @@
         const weightedScore = (gpaPercentage * (gpaWeight / 100)) + (qudrat * (qudratWeight / 100)) + (tahsili * (tahsiliWeight / 100));
 
         const arabicResult = new Intl.NumberFormat('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(weightedScore);
-        resultDiv.innerText = `معدل التخصيص: ${arabicResult}٪`;
+        resultDiv.innerText = `النسبة الموزونة: ${arabicResult}٪`;
         resultDiv.style.color = successColor;
     }
 
